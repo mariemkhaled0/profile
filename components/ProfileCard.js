@@ -4,7 +4,7 @@ import Image from "next/image";
 import InfoCard from "./InfoCard";
 import { useTranslation } from "react-i18next";
 const i18nNamespaces = ["profileCard"];
-function ProfileCard() {
+function ProfileCard({ userDetails }) {
   const { t } = useTranslation(i18nNamespaces);
   // State to store the uploaded image
   const [image, setImage] = useState("/images/profilePc.svg");
@@ -25,14 +25,14 @@ function ProfileCard() {
     <div className="  flex flex-col gap-7">
       <div className="dark:bg-[#b7b7b752] flex flex-col justify-center items-center bg-white px-[60px] pt-7 pb-8 rounded-2xl">
         <label htmlFor="profile-image-upload" className="cursor-pointer">
-          <div className="">
+          <div className="rounded-full">
             {/* Profile image with an onClick handler */}
             <Image
-              width={140}
-              height={140}
+              width={200}
+              height={160}
               src={image}
               alt="profile-picture"
-              className="hover:"
+              className="rounded-[100%] w-[200px] h-[170px]"
             />
             <p className="text-center text-white  text-[10px] pt-1 hover:text-[#888888]">
               upload image
@@ -47,11 +47,15 @@ function ProfileCard() {
           onChange={handleImageChange}
           className="hidden"
         />
-        <h5 className="text-[#5900CA] pt-2 font-bold">@User-Name</h5>
-        <h6 className="text-[#888888] font-bold text-[14px]">user@email.com</h6>
+        <h5 className="dark:text-white text-[#5900CA] pt-2 font-bold">
+          {userDetails.name || "user Name"}
+        </h5>
+        <h6 className="text-[#888888] font-bold text-[14px]">
+          {userDetails.email || "user@email.com"}
+        </h6>
       </div>
       <div className="w-full">
-        <InfoCard />
+        <InfoCard userDetails={userDetails} />
       </div>
     </div>
   );

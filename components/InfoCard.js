@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import Toggle from "../public/images/Toggle.svg";
 import ToggleClosed from "../public/images/ToggleClosed.svg";
 
-function InfoCard() {
+function InfoCard({ userDetails }) {
   const i18nNamespaces = ["profileCard"];
   const { t } = useTranslation(i18nNamespaces);
 
@@ -46,15 +46,15 @@ function InfoCard() {
       <strong className="pb-4">{t("Information")}</strong>
       <div className="flex gap-3 w-full">
         <strong>{t("Name")}:</strong>
-        <p>{t("Name_Last_Name")}</p>
+        <p>{`${userDetails.name} ${userDetails.lastName}`}</p>
       </div>
       <div className="flex flex-nowrap gap-4">
         <strong>{t("Email")}</strong>
-        <p>user@email.com</p>
+        <p>{userDetails.email}</p>
       </div>
       <div className="flex flex-nowrap gap-4">
         <strong>{t("Tel")}:</strong>
-        <p>+51 966 696 123</p>
+        <p>{userDetails.tel}</p>
       </div>
       <div className="flex flex-nowrap gap-4">
         <strong>{t("Plan")}:</strong>

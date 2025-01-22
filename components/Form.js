@@ -4,10 +4,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import i18nConfig from "@/i18n.config";
+import { toast } from "react-toastify";
 
-// Validation Schema with Yup
-
-const validationSchema = Yup.object({
+// Validation Schema for User Details
+const userDetailsSchema = Yup.object({
   name: Yup.string()
     .min(2, "Name is too short")
     .max(50, "Name is too long")
@@ -20,6 +20,10 @@ const validationSchema = Yup.object({
   tel: Yup.string()
     .matches(/^[0-9]{10}$/, "Invalid phone number")
     .required("Required"),
+});
+
+// Validation Schema for Password Change
+const passwordSchema = Yup.object({
   newPassword: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Required"),
@@ -28,32 +32,35 @@ const validationSchema = Yup.object({
     .required("Required"),
 });
 
-const MyForm = () => {
-  // console.log("direction", direction);
+const MyForm = ({ handleSaveUserDetails }) => {
   const i18nNamespaces = ["Form", "navbar"];
   const { t } = useTranslation(i18nNamespaces);
+
   return (
-    <div className="dark:bg-[#b7b7b752]  z-[1] w-full lg:w-[700px] p-9 mb-7 border rounded-xl  bg-white">
+    <div className="dark:bg-[#b7b7b752] z-[1] w-full lg:w-[700px] p-9 mb-7 border rounded-xl bg-white">
       <h2 className="mb-9 font-bold">{t("User_Settings")}</h2>
       <h2 className="pb-7 font-bold">{t("Details")}</h2>
+
+      {/* Form for User Details */}
       <Formik
         initialValues={{
           name: "",
           lastName: "",
           email: "",
           tel: "",
-          newPassword: "",
-          confirmPassword: "",
         }}
-        validationSchema={validationSchema}
+        validationSchema={userDetailsSchema}
         onSubmit={(values) => {
+          handleSaveUserDetails(values);
           console.log(values);
+          toast.success(t("Changes_saved"));
         }}
       >
-        {({ touched, errors }) => (
-          <Form className="space-y-8  ">
-            {/* Name & Last Name on the same line */}
-            <div className="flex flex-col md:flex-row justify-center items-center gap-5 ">
+        {({ touched, errors, handleSubmit }) => (
+          <Form className="space-y-8">
+            {/* Name & Last Name */}
+            <div className="flex flex-col md:flex-row justify-center items-center gap-5">
+              {/* Name Field */}
               <div className="w-full relative">
                 <label
                   htmlFor="name"
@@ -66,15 +73,11 @@ const MyForm = () => {
                   id="name"
                   name="name"
                   placeholder={t("Enter_your_name")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.name && errors.name
                       ? "border-red-500 dark:bg-red-950"
                       : "border-gray-300 dark:bg-red-950"
                   } focus:ring-blue-500`}
-                  // style={{
-                  //   backgroundColor: "rgba(183, 183, 183, 0.32)",
-                  //   color: "#000000",
-                  // }}
                 />
                 <ErrorMessage
                   name="name"
@@ -82,7 +85,7 @@ const MyForm = () => {
                   className="text-red-500 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
-
+              {/* Last Name Field */}
               <div className="w-full relative">
                 <label
                   htmlFor="lastName"
@@ -95,15 +98,11 @@ const MyForm = () => {
                   id="lastName"
                   name="lastName"
                   placeholder={t("Enter_your_last name")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:text-black dark:bg-white ${
                     touched.lastName && errors.lastName
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
-                  // style={{
-                  //   backgroundColor: "rgba(183, 183, 183, 0.32)",
-                  //   color: "#000000",
-                  // }}
                 />
                 <ErrorMessage
                   name="lastName"
@@ -113,8 +112,9 @@ const MyForm = () => {
               </div>
             </div>
 
-            {/* Email & Telephone on the same line */}
+            {/* Email & Tel */}
             <div className="flex flex-col md:flex-row justify-center items-center gap-3">
+              {/* Email Field */}
               <div className="w-full relative">
                 <label
                   htmlFor="email"
@@ -127,15 +127,11 @@ const MyForm = () => {
                   id="email"
                   name="email"
                   placeholder={t("Enter_your_email")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.email && errors.email
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
-                  // style={{
-                  //   backgroundColor: "rgba(183, 183, 183, 0.32)",
-                  //   color: "#000000",
-                  // }}
                 />
                 <ErrorMessage
                   name="email"
@@ -143,7 +139,7 @@ const MyForm = () => {
                   className="text-red-500 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
-
+              {/* Tel Field */}
               <div className="w-full relative">
                 <label
                   htmlFor="tel"
@@ -155,17 +151,12 @@ const MyForm = () => {
                   type="tel"
                   id="tel"
                   name="tel"
-                  // dir={direction}
                   placeholder={t("Enter_your_phone_number")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:text-black dark:bg-white ${
                     touched.tel && errors.tel
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
-                  // style={{
-                  //   backgroundColor: "rgba(183, 183, 183, 0.32)",
-                  //   color: "#000000",
-                  // }}
                 />
                 <ErrorMessage
                   name="tel"
@@ -177,23 +168,40 @@ const MyForm = () => {
 
             {/* Save Changes Button */}
             <button
-              type="submit"
-              className="w-full  lg:w-[45%] h-[45px] dark:bg-[#4c1f65] bg-[#BF50FF] text-white p-2 rounded-md  "
+              type="button"
+              onClick={() => handleSubmit()}
+              className="w-full lg:w-[45%] h-[45px] dark:bg-[#4c1f65] bg-[#BF50FF] text-white p-2 rounded-md"
             >
               {t("Save_changes")}
             </button>
+          </Form>
+        )}
+      </Formik>
 
-            {/* Password Change Section */}
-            <h2 className="text-xl font-semibold dark:text-white text-gray-700">
-              {" "}
-              {t("Password")}
-            </h2>
+      {/* Password Change Section */}
+      <h2 className="text-xl font-semibold mt-9 mb-3 dark:text-white text-gray-700">
+        {t("Password")}
+      </h2>
 
+      <Formik
+        initialValues={{
+          newPassword: "",
+          confirmPassword: "",
+        }}
+        validationSchema={passwordSchema}
+        onSubmit={(values) => {
+          console.log("Password Change:", values);
+          toast.success(t("Password changed"));
+        }}
+      >
+        {({ touched, errors, handleSubmit }) => (
+          <Form className="space-y-8">
+            {/* New Password */}
             <div className="flex flex-col md:flex-row justify-center items-center gap-3">
-              <div className="w-full relative">
+              <div className="w-full relative ">
                 <label
                   htmlFor="newPassword"
-                  className="block text-sm font-medium text-gray-700 dark:text-white"
+                  className="block text-sm font-medium  text-gray-700 dark:text-white"
                 >
                   {t("Password")}
                 </label>
@@ -202,15 +210,11 @@ const MyForm = () => {
                   id="newPassword"
                   name="newPassword"
                   placeholder={t("Enter_new_password")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.newPassword && errors.newPassword
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
-                  // style={{
-                  //   backgroundColor: "rgba(183, 183, 183, 0.32)",
-                  //   color: "#000000",
-                  // }}
                 />
                 <ErrorMessage
                   name="newPassword"
@@ -218,7 +222,7 @@ const MyForm = () => {
                   className="text-red-500 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
-
+              {/* Confirm Password */}
               <div className="w-full relative">
                 <label
                   htmlFor="confirmPassword"
@@ -231,15 +235,11 @@ const MyForm = () => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder={t("Confirm_new_password")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.confirmPassword && errors.confirmPassword
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
-                  // style={{
-                  //   backgroundColor: "rgba(183, 183, 183, 0.32)",
-                  //   color: "#000000",
-                  // }}
                 />
                 <ErrorMessage
                   name="confirmPassword"
@@ -248,17 +248,17 @@ const MyForm = () => {
                 />
               </div>
             </div>
-
-            {/* Save Changes Button for Password */}
+            {/* Save Password Changes Button */}
             <div className="flex flex-col lg:flex-row justify-between w-full">
               <button
-                type="submit"
-                className="w-full lg:w-[45%] h-[45px] dark:bg-gray-800 bg-[#5900CA] text-white p-2 rounded-md  "
+                type="button"
+                onClick={() => handleSubmit()}
+                className="w-full lg:w-[45%] h-[45px] dark:bg-gray-800 bg-[#5900CA] text-white p-2 rounded-md"
               >
                 {t("Save_changes")}
               </button>
 
-              {/* Forget Password Text */}
+              {/* Forgot Password Link */}
               <div className="mt-2 text-center">
                 <a href="/" className="text-[#8A8A8A] hover:text-blue-700">
                   {t("Forgot_your_password")}
