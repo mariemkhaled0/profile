@@ -73,7 +73,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="name"
                   name="name"
                   placeholder={t("Enter_your_name")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.name && errors.name
                       ? "border-red-500 dark:bg-red-950"
                       : "border-gray-300 dark:bg-red-950"
@@ -98,7 +98,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="lastName"
                   name="lastName"
                   placeholder={t("Enter_your_last name")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:text-black dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none  focus:ring-2 bg-[#B7B7B752] text-black dark:bg-white ${
                     touched.lastName && errors.lastName
                       ? "border-red-500"
                       : "border-gray-300"
@@ -127,7 +127,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="email"
                   name="email"
                   placeholder={t("Enter_your_email")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.email && errors.email
                       ? "border-red-500"
                       : "border-gray-300"
@@ -152,7 +152,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="tel"
                   name="tel"
                   placeholder={t("Enter_your_phone_number")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:text-black dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] text-black dark:bg-white ${
                     touched.tel && errors.tel
                       ? "border-red-500"
                       : "border-gray-300"
@@ -210,7 +210,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="newPassword"
                   name="newPassword"
                   placeholder={t("Enter_new_password")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.newPassword && errors.newPassword
                       ? "border-red-500"
                       : "border-gray-300"
@@ -235,7 +235,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder={t("Confirm_new_password")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.confirmPassword && errors.confirmPassword
                       ? "border-red-500"
                       : "border-gray-300"
