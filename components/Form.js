@@ -59,7 +59,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
         {({ touched, errors, handleSubmit }) => (
           <Form className="space-y-8">
             {/* Name & Last Name */}
-            <div className="flex flex-col md:flex-row justify-center items-center gap-5">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-7">
               {/* Name Field */}
               <div className="w-full relative">
                 <label
@@ -82,7 +82,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="name"
                   component="div"
-                  className="text-red-500 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
               {/* Last Name Field */}
@@ -107,13 +107,13 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="lastName"
                   component="div"
-                  className="text-red-500 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
             </div>
 
             {/* Email & Tel */}
-            <div className="flex flex-col md:flex-row justify-center items-center gap-3">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-7">
               {/* Email Field */}
               <div className="w-full relative">
                 <label
@@ -136,7 +136,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="email"
                   component="div"
-                  className="text-red-500 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
               {/* Tel Field */}
@@ -161,7 +161,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="tel"
                   component="div"
-                  className="text-red-500 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
             </div>
@@ -195,9 +195,9 @@ const MyForm = ({ handleSaveUserDetails }) => {
         }}
       >
         {({ touched, errors, handleSubmit }) => (
-          <Form className="space-y-8">
+          <Form className="space-y-10">
             {/* New Password */}
-            <div className="flex flex-col md:flex-row justify-center items-center gap-3">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-7">
               <div className="w-full relative ">
                 <label
                   htmlFor="newPassword"
@@ -219,7 +219,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="newPassword"
                   component="div"
-                  className="text-red-500 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
               {/* Confirm Password */}
@@ -244,7 +244,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="confirmPassword"
                   component="div"
-                  className="text-red-500 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
             </div>
@@ -260,7 +260,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
 
               {/* Forgot Password Link */}
               <div className="mt-2 text-center">
-                <a href="/" className="text-[#8A8A8A] hover:text-blue-700">
+                <a href="/#" className="text-[#8A8A8A] hover:text-blue-700">
                   {t("Forgot_your_password")}
                 </a>
               </div>

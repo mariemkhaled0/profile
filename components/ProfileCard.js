@@ -29,10 +29,10 @@ function ProfileCard({ userDetails }) {
             {/* Profile image with an onClick handler */}
             <Image
               width={200}
-              height={160}
+              height={170}
               src={image}
               alt="profile-picture"
-              className="rounded-[100%] w-[200px] h-[170px]"
+              className="rounded-[100%] w-[200px] h-[180px]"
             />
             <p className="text-center text-white  text-[10px] pt-1 hover:text-[#888888]">
               upload image
