@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class", // Enables dark mode based on a class
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,5 +14,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
