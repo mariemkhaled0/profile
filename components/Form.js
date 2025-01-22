@@ -28,8 +28,8 @@ const validationSchema = Yup.object({
     .required("Required"),
 });
 
-const MyForm = ({ direction }) => {
-  console.log("direction", direction);
+const MyForm = () => {
+  // console.log("direction", direction);
   const i18nNamespaces = ["Form", "navbar"];
   const { t } = useTranslation(i18nNamespaces);
   return (
@@ -155,7 +155,7 @@ const MyForm = ({ direction }) => {
                   type="tel"
                   id="tel"
                   name="tel"
-                  dir={direction}
+                  // dir={direction}
                   placeholder={t("Enter_your_phone_number")}
                   className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:bg-white ${
                     touched.tel && errors.tel

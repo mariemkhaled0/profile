@@ -13,28 +13,33 @@ function InfoCard() {
   // State to track dark mode
   const [darkMode, setDarkMode] = useState(false);
 
+  // Check if window is available before using browser-specific features
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Apply dark mode on page load based on saved preference
+      const savedDarkMode = localStorage.getItem("darkMode") === "true";
+      setDarkMode(savedDarkMode);
+      if (savedDarkMode) {
+        document.documentElement.classList.add("dark");
+      }
+    }
+  }, []);
+
   // Toggle dark mode and apply/remove the 'dark' class from the <html> element
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
-    if (newDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    if (typeof window !== "undefined") {
+      if (newDarkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
 
-    // Save the preference in localStorage
-    localStorage.setItem("darkMode", newDarkMode);
+      // Save the preference in localStorage
+      localStorage.setItem("darkMode", newDarkMode);
+    }
   };
-
-  // Apply dark mode on page load based on saved preference
-  useEffect(() => {
-    const savedDarkMode = localStorage.getItem("darkMode") === "true";
-    setDarkMode(savedDarkMode);
-    if (savedDarkMode) {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
 
   return (
     <div className="dark:bg-[#b7b7b752] flex flex-col text-[14px] space-y-4 px-[30px] bg-white pb-20 pt-7 rounded-2xl">
