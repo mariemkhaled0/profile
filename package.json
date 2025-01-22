@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "i18nexus pull && next dev --turbopack",
     "build": " i18nexus pull && next build",
+    "export": "next export",
     "start": " i18nexus pull &&  next start",
     "lint": "next lint"
   },

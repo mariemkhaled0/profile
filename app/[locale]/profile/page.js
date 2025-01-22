@@ -9,7 +9,9 @@ import i18nConfig from "@/i18n.config";
 import React from "react";
 
 const i18nNamespaces = ["Form", "navbar", "profileCard", "Statistics"];
-
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }];
+}
 async function page({ params: { locale } }) {
   const { t, resources } = await initTranslations(locale, i18nNamespaces);
   const direction = i18nConfig.dir[locale] || "ltr"; // Default to 'ltr'
