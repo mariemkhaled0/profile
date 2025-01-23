@@ -25,29 +25,27 @@ export default function Sidebar({ direction }) {
         ></div>
       )}
       <div
-        className={`fixed top-0 sidebar  z-50 w-[280px] ${
-          direction === "ltr" ? "left-0" : "right-0"
-        } h-full  bg-white  transition-transform duration-300 ${
+        className={`fixed top-0 z-50 w-[280px] h-full bg-white dark:bg-gray-900 dark:text-white transition-transform duration-300 ${
           isSidebarOpen
             ? "translate-x-0"
             : direction === "rtl"
             ? "translate-x-full"
             : "-translate-x-full"
-        }`}
+        } md:translate-x-0 md:fixed `}
       >
+        {/* Close Button for Small Screens */}
         {isSidebarOpen && (
           <button
-            className={`${
-              direction === "rtl"
-                ? "left-4 absolute top-4"
-                : "right-4 absolute top-4"
-            } `}
+            className={`absolute top-4 ${
+              direction === "rtl" ? "left-4" : "right-4"
+            } lg:hidden`}
             onClick={closeSidebar}
           >
             <IoClose className="dark:text-white" size={23} />
           </button>
         )}
-        <nav className="h-full sidebar  z-50 dark:bg-gray-900 dark:text-white text-[18px] overflow-y-auto  scrollbar-hide ">
+
+        <nav className="h-full sidebar   z-50 dark:bg-gray-900 dark:text-white text-[18px] overflow-y-auto  scrollbar-hide ">
           <div
             className={`${
               direction === "ltr" ? "mt-28 mb-24 ml-3" : "mt-28 mb-24 mr-4"
