@@ -33,7 +33,6 @@ export default function Sidebar({ direction }) {
             : "-translate-x-full"
         } md:translate-x-0 md:fixed `}
       >
-        {/* Close Button for Small Screens */}
         {isSidebarOpen && (
           <button
             className={`absolute top-4 ${
