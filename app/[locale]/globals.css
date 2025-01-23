@@ -30,3 +30,14 @@ html.dark {
 /* .card.dark {
   background-color: #b7b7b752;
 } */
+.form-control {
+  position: relative;
+}
+
+.form-control.valid::after {
+  content: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M15 8a.5.5 0 0 1 .5-.5h-4.707L10.707 4.707a.707.707 0 0 0-1.001 0l-3 3a.707.707 0 0 0 0 1.001L9.293 11.293a.5.5 0 0 1 .707-.707z' fill='%232ECC71'/%3E%3C/svg%3E");
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}

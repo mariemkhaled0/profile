@@ -26,7 +26,9 @@ function Statistics() {
         <h2 className="font-bold">{t("Total Vehicles")}</h2>
         <h3 className="text-[#000000] text-4xl">18</h3>
       </div>
-      <Map />
+      <div className="z-1">
+        <Map />
+      </div>
     </div>
   );
 }

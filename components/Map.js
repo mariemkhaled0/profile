@@ -15,12 +15,13 @@ function Map() {
   const pyramidCoordinates = [29.9792, 31.1342]; // Latitude and Longitude of Pyramid of Giza
 
   return (
-    <div className="w-full h-[200px] rounded-xl overflow-hidden">
+    <div className="w-full relative z-1 h-[200px] rounded-xl overflow-hidden">
       <MapContainer
         center={pyramidCoordinates}
         zoom={13}
         scrollWheelZoom={false}
         style={{ height: "100%", width: "100%" }}
+        className="z-10"
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

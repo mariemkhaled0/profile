@@ -5,6 +5,7 @@ import initTranslations from "../i18n";
 import TranslationsProvider from "@/components/TranslationProvider";
 import i18nConfig from "@/i18n.config";
 import Button from "@/components/Button";
+import { SidebarProvider } from "@/components/sidebarContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,29 +41,25 @@ export default async function RootLayout({ children, params: { locale } }) {
           locale={locale}
           resources={resources}
         >
-          <div
-            className={`${
-              direction === "rtl"
-                ? "right-0 fixed   z-50 sidebar bg-white hidden md:block top-0  h-screen w-[280px]"
-                : " left-0 fixed   z-50 sidebar bg-white hidden md:block  top-0  h-screen w-[280px]"
-            }`}
-          >
-            <Sidebar direction={direction} />
-          </div>
-
-          <div
-            className={`${
-              direction === "rtl"
-                ? "md:mr-[280px] flex-grow"
-                : "md:ml-[280px] flex-grow"
-            }`}
-          >
-            <div className="md:hidden block  ">
-              <Button direction={direction} />
+          <SidebarProvider>
+            <div className="z-50 flex">
+              <Sidebar direction={direction} />
             </div>
 
-            {children}
-          </div>
+            <div
+              className={`${
+                direction === "rtl"
+                  ? "md:mr-[280px] flex-grow"
+                  : "md:ml-[280px] flex-grow"
+              }`}
+            >
+              <div className="md:hidden block  ">
+                <Button direction={direction} />
+              </div>
+
+              {children}
+            </div>
+          </SidebarProvider>
         </TranslationsProvider>
       </body>
     </html>

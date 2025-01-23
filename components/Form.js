@@ -3,13 +3,14 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
-import i18nConfig from "@/i18n.config";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 // Validation Schema for User Details
 const userDetailsSchema = Yup.object({
   name: Yup.string()
-    .min(2, "Name is too short")
+    .min(2, "Name must be at least 2")
     .max(50, "Name is too long")
     .required("Required"),
   lastName: Yup.string()
@@ -50,13 +51,26 @@ const MyForm = ({ handleSaveUserDetails }) => {
           tel: "",
         }}
         validationSchema={userDetailsSchema}
-        onSubmit={(values) => {
+        // validateOnChange={true}
+        // validateOnBlur={true}
+        onSubmit={(values, { resetForm }) => {
           handleSaveUserDetails(values);
-          console.log(values);
-          toast.success(t("Changes_saved"));
+          toast.success(t("Changes saved"));
+          resetForm();
         }}
       >
-        {({ touched, errors, handleSubmit }) => (
+        {({
+          touched,
+          errors,
+          handleSubmit,
+          // setFieldValue,
+          setFieldTouched,
+          handleChange,
+          // validateForm,
+          handleBlur,
+          isValid,
+          values,
+        }) => (
           <Form className="space-y-8">
             {/* Name & Last Name */}
             <div className="flex flex-col md:flex-row justify-center items-center gap-7">
@@ -73,17 +87,28 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="name"
                   name="name"
                   placeholder={t("Enter_your_name")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 text-black bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none  focus:ring-2 bg-[#B7B7B752] text-black dark:bg-white ${
                     touched.name && errors.name
-                      ? "border-red-500 dark:bg-red-950"
-                      : "border-gray-300 dark:bg-red-950"
+                      ? "border-red-500"
+                      : "border-gray-300"
                   } focus:ring-blue-500`}
+                  onChange={(e) => {
+                    handleChange(e); // Formik's default change handler
+                    setFieldTouched("name", true, false); // Mark the field as touched
+                  }}
                 />
                 <ErrorMessage
                   name="name"
                   component="div"
-                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-300 text-xs absolute mt-2 top-[60px]"
                 />
+
+                {touched.name && !errors.name && (
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className=" absolute right-3 p-[2px] text-xs rounded-full top-8 bg-green-500 text-white"
+                  />
+                )}
               </div>
               {/* Last Name Field */}
               <div className="w-full relative">
@@ -103,12 +128,23 @@ const MyForm = ({ handleSaveUserDetails }) => {
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
+                  onChange={(e) => {
+                    handleChange(e); // Formik's default change handler
+                    setFieldTouched("lastName", true, false); // Mark the field as touched
+                  }}
                 />
+
                 <ErrorMessage
                   name="lastName"
                   component="div"
-                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-300 text-xs absolute mt-2 top-[60px]"
                 />
+                {touched.lastName && !errors.lastName && (
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className=" absolute right-3 p-[2px] text-xs rounded-full top-8 bg-green-500 text-white"
+                  />
+                )}
               </div>
             </div>
 
@@ -132,12 +168,22 @@ const MyForm = ({ handleSaveUserDetails }) => {
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
+                  onChange={(e) => {
+                    handleChange(e); // Formik's default change handler
+                    setFieldTouched("email", true, false); // Mark the field as touched
+                  }}
                 />
                 <ErrorMessage
                   name="email"
                   component="div"
-                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-300 text-xs absolute mt-2 top-[60px]"
                 />
+                {touched.email && !errors.email && (
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className=" absolute right-3 p-[2px] text-xs rounded-full top-8 bg-green-500 text-white"
+                  />
+                )}
               </div>
               {/* Tel Field */}
               <div className="w-full relative">
@@ -152,17 +198,28 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="tel"
                   name="tel"
                   placeholder={t("Enter_your_phone_number")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] text-black dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:text-black dark:bg-white ${
                     touched.tel && errors.tel
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
+                  onChange={(e) => {
+                    handleChange(e); // Formik's default change handler
+                    setFieldTouched("tel", true, false); // Mark the field as touched
+                  }}
+                  onBlur={handleBlur}
                 />
                 <ErrorMessage
                   name="tel"
                   component="div"
-                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-300 text-xs absolute mt-2 top-[60px]"
                 />
+                {touched.tel && !errors.tel && (
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className=" absolute right-3 p-[2px] text-xs rounded-full top-8 bg-green-500 text-white"
+                  />
+                )}
               </div>
             </div>
 
@@ -170,6 +227,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
             <button
               type="button"
               onClick={() => handleSubmit()}
+              disabled={!isValid}
               className="w-full lg:w-[45%] h-[45px] dark:bg-[#4c1f65] bg-[#BF50FF] text-white p-2 rounded-md"
             >
               {t("Save_changes")}
@@ -189,9 +247,9 @@ const MyForm = ({ handleSaveUserDetails }) => {
           confirmPassword: "",
         }}
         validationSchema={passwordSchema}
-        onSubmit={(values) => {
-          console.log("Password Change:", values);
+        onSubmit={(values, { resetForm }) => {
           toast.success(t("Password changed"));
+          resetForm();
         }}
       >
         {({ touched, errors, handleSubmit }) => (
@@ -219,7 +277,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="newPassword"
                   component="div"
-                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-300 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
               {/* Confirm Password */}
@@ -235,7 +293,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder={t("Confirm_new_password")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 text-black bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.confirmPassword && errors.confirmPassword
                       ? "border-red-500"
                       : "border-gray-300"
@@ -244,7 +302,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                 <ErrorMessage
                   name="confirmPassword"
                   component="div"
-                  className="text-red-500 dark:text-red-900 text-xs absolute mt-2 top-[60px]"
+                  className="text-red-500 dark:text-red-300 text-xs absolute mt-2 top-[60px]"
                 />
               </div>
             </div>

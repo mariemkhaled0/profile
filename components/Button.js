@@ -1,26 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaAlignJustify } from "react-icons/fa";
+import { useSidebar } from "./sidebarContext";
 
 function Button({ direction }) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    // This will ensure that the code runs only on the client
-    setIsMounted(true);
-  }, []);
-
-  const handleToggle = () => {
-    if (isMounted) {
-      const sidebar = document.querySelector(".sidebar");
-      sidebar.classList.toggle("hidden");
-      console.log(sidebar);
-    }
-  };
+  const { toggleSidebar } = useSidebar();
 
   return (
     <button
-      onClick={handleToggle}
+      onClick={toggleSidebar}
       className={`${
         direction === "ltr" ? "absolute top-8 right-2" : "absolute top-8 left-2"
       }`}

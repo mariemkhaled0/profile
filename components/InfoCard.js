@@ -42,7 +42,7 @@ function InfoCard({ userDetails }) {
   };
 
   return (
-    <div className="dark:bg-[#b7b7b752] flex flex-col text-[14px] space-y-4 px-[30px] bg-white pb-20 pt-7 rounded-2xl">
+    <div className="dark:bg-[#b7b7b752] text-black dark:text-white flex flex-col text-[14px] space-y-4 px-[30px] bg-white pb-20 pt-7 rounded-2xl">
       <strong className="pb-4">{t("Information")}</strong>
       <div className="flex gap-3 w-full">
         <strong>{t("Name")}:</strong>
