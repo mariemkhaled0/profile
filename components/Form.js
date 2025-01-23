@@ -39,8 +39,12 @@ const MyForm = ({ handleSaveUserDetails }) => {
 
   return (
     <div className="dark:bg-[#b7b7b752] z-[1] w-full lg:w-[700px] p-9 mb-7 border rounded-xl bg-white">
-      <h2 className="mb-9 text-black font-bold">{t("User_Settings")}</h2>
-      <h2 className="pb-7 text-black font-bold">{t("Details")}</h2>
+      <h2 className="mb-9 text-black dark:text-white font-bold">
+        {t("User_Settings")}
+      </h2>
+      <h2 className="pb-7 text-black dark:text-white font-bold">
+        {t("Details")}
+      </h2>
 
       {/* Form for User Details */}
       <Formik
@@ -252,7 +256,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
           resetForm();
         }}
       >
-        {({ touched, errors, handleSubmit }) => (
+        {({ touched, errors, handleSubmit, handleChange, setFieldTouched }) => (
           <Form className="space-y-10">
             {/* New Password */}
             <div className="flex flex-col md:flex-row justify-center items-center gap-7">
@@ -273,6 +277,10 @@ const MyForm = ({ handleSaveUserDetails }) => {
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
+                  onChange={(e) => {
+                    handleChange(e); // Formik's default change handler
+                    setFieldTouched("newPassword", true, false); // Mark the field as touched
+                  }}
                 />
                 <ErrorMessage
                   name="newPassword"
@@ -298,6 +306,10 @@ const MyForm = ({ handleSaveUserDetails }) => {
                       ? "border-red-500"
                       : "border-gray-300"
                   } focus:ring-blue-500`}
+                  onChange={(e) => {
+                    handleChange(e); // Formik's default change handler
+                    setFieldTouched("confirmPassword", true, false); // Mark the field as touched
+                  }}
                 />
                 <ErrorMessage
                   name="confirmPassword"
