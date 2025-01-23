@@ -40,7 +40,7 @@ export default function Sidebar({ direction }) {
             } lg:hidden`}
             onClick={closeSidebar}
           >
-            <IoClose className="dark:text-white" size={23} />
+            <IoClose className="dark:text-white text-black" size={23} />
           </button>
         )}
 
@@ -50,7 +50,9 @@ export default function Sidebar({ direction }) {
               direction === "ltr" ? "mt-28 mb-24 ml-3" : "mt-28 mb-24 mr-4"
             }`}
           >
-            <h2 className="mb-6 ml-3 ">{t("general")}</h2>
+            <h2 className="mb-6 ml-3 text-black dark:text-white ">
+              {t("general")}
+            </h2>
             <div
               className={`flex w-[250px] gap-2 pt-3 pb-3 pl-3 dark:text-white text-[#888888] hover:bg-[#5900CA17] dark:hover:bg-gray-600 transition-all duration-300 ease-in-out focus:outline-none focus:bg-[#5900CA17] focus:border-r-4 focus:border-r-[#5900CA] ${
                 direction === "ltr"
@@ -81,7 +83,9 @@ export default function Sidebar({ direction }) {
               <Image src={ReporteDePasajeros} alt="icon" width={24} />
               <Link href="/">{t("Passenger_Report")}</Link>
             </div>
-            <h2 className="mt-7 mb-5 pl-3">{t("user")}</h2>
+            <h2 className="mt-7 mb-5 pl-3 text-black dark:text-white">
+              {t("user")}
+            </h2>
             <div
               className={`flex  w-[250px] gap-2 pt-3 pb-3 pl-3 dark:text-white text-[#888888] hover:bg-[#5900CA17] dark:hover:bg-gray-600  transition-all duration-300 ease-in-out focus:outline-none focus:bg-[#5900CA17] focus:border-r-4 focus:border-r-[#5900CA] ${
                 direction === "ltr"
@@ -92,7 +96,9 @@ export default function Sidebar({ direction }) {
               <Image src={Usuario} alt="icon" width={24} />
               <Link href="/profile">{t("profile")}</Link>
             </div>
-            <h2 className="mt-7  mb-6 pl-3">{t("admin")}</h2>
+            <h2 className="mt-7 text-black dark:text-white mb-6 pl-3">
+              {t("admin")}
+            </h2>
             <div
               className={`flex w-[250px] gap-2 pt-3 pb-3 pl-3 dark:text-white text-[#888888] hover:bg-[#5900CA17] dark:hover:bg-gray-600  transition-all duration-300 ease-in-out focus:outline-none focus:bg-[#5900CA17] focus:border-r-4 focus:border-r-[#5900CA] ${
                 direction === "ltr"
