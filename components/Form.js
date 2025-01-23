@@ -39,8 +39,8 @@ const MyForm = ({ handleSaveUserDetails }) => {
 
   return (
     <div className="dark:bg-[#b7b7b752] z-[1] w-full lg:w-[700px] p-9 mb-7 border rounded-xl bg-white">
-      <h2 className="mb-9 font-bold">{t("User_Settings")}</h2>
-      <h2 className="pb-7 font-bold">{t("Details")}</h2>
+      <h2 className="mb-9 text-black font-bold">{t("User_Settings")}</h2>
+      <h2 className="pb-7 text-black font-bold">{t("Details")}</h2>
 
       {/* Form for User Details */}
       <Formik
@@ -198,7 +198,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="tel"
                   name="tel"
                   placeholder={t("Enter_your_phone_number")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] dark:text-black dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 bg-[#B7B7B752] text-black dark:bg-white ${
                     touched.tel && errors.tel
                       ? "border-red-500"
                       : "border-gray-300"
@@ -293,7 +293,7 @@ const MyForm = ({ handleSaveUserDetails }) => {
                   id="confirmPassword"
                   name="confirmPassword"
                   placeholder={t("Confirm_new_password")}
-                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 dark:text-black bg-[#B7B7B752] dark:bg-white ${
+                  className={`mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 text-black bg-[#B7B7B752] dark:bg-white ${
                     touched.confirmPassword && errors.confirmPassword
                       ? "border-red-500"
                       : "border-gray-300"
